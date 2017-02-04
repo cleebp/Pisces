@@ -9,13 +9,12 @@ class Bubble extends Kinematics
 {
     float diameter;
     color mainColor;
-    String id;
     float maxSpeed;
 
     Bubble(color c) 
     {
         super(0,0); //0.8, 0.2, new PVector(0, -1)); 
-        pos = new PVector(int(random(0, width - 1)), height - 1);
+        pos = new PVector(int(random(width)), height);
         diameter = int(random(30, 50));
         maxSpeed = 1;
         mainColor = c;
@@ -24,12 +23,21 @@ class Bubble extends Kinematics
     }
 
     void render() {
-        smooth();
+        /*smooth();
         stroke(mainColor);
         strokeWeight(3);
         noFill();
         ellipseMode(CENTER);
-        ellipse(pos.x, pos.y, diameter, diameter);
+        ellipse(pos.x, pos.y, diameter, diameter);*/
+        
+        stroke(mainColor);
+        strokeWeight(3);
+        noFill();
+        pushMatrix();
+        translate(pos.x,pos.y);
+        ellipseMode(CENTER);
+        ellipse(0, 0, diameter, diameter);
+        popMatrix();
     }
 
     void update() {

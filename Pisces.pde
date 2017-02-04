@@ -23,7 +23,7 @@ void setup()
   //spawn a shark at a random point on the left side of the screen
   bruce = new Shark(0, int(random(height)));
   
-  fishList = new Fish[900];
+  fishList = new Fish[800];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
@@ -54,21 +54,25 @@ void draw()
   
   float randomNumber = random(0, 1000);
 
-  if(randomNumber > 980) {
-      foregroundBubbles.add(new Bubble( color(int(random(100, 255)), 200)));
+  if(randomNumber > 980) 
+  {
+    foregroundBubbles.add(new Bubble( color(int(random(100, 255)), 50)));
   } 
-  else if(randomNumber < 20) {
-      backgroundBubbles.add(new Bubble( color(int(random(100, 255)), 100)));
+  else if(randomNumber < 20) 
+  {
+    backgroundBubbles.add(new Bubble( color(int(random(100, 255)), 50)));
   }
 
-  for(int i = backgroundBubbles.size()-1; i >= 0; i--) {
-      Bubble bubble = backgroundBubbles.get(i);
-      if (bubble.pos.y < -50)
-          backgroundBubbles.remove(i);
-      else {
-          bubble.update();
-          bubble.render();
-      }
+  for(int i = backgroundBubbles.size()-1; i >= 0; i--) 
+  {
+    Bubble bubble = backgroundBubbles.get(i);
+    if (bubble.pos.y < -50)
+      backgroundBubbles.remove(i);
+    else 
+    {
+      bubble.update();
+      bubble.render();
+    }
   }
   
   int m = millis();
@@ -125,13 +129,15 @@ void draw()
     fishList[i].display();
   }
   
-  for(int i = foregroundBubbles.size()-1; i >= 0; i--) {
+  for(int i = foregroundBubbles.size()-1; i >= 0; i--) 
+  {
     Bubble bubble = foregroundBubbles.get(i);
     if (bubble.pos.y < -50)
-        foregroundBubbles.remove(i);
-    else {
-        bubble.update();
-        bubble.render();
+      foregroundBubbles.remove(i);
+    else 
+    {
+      bubble.update();
+      bubble.render();
     }
   }
 }
