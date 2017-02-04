@@ -2,14 +2,16 @@
  * pisces.pde
  * 
  * @author: Brian Clee | bpclee@ncsu.edu
- * @version: 2/3/2017
  */
  
 Fish[] fishList;
 Shark bruce;
 
-int trails = 20;
+int trails = 69; // original 20, higher = less trail
 int[] leaders;
+
+ArrayList<Bubble> foregroundBubbles;
+ArrayList<Bubble> backgroundBubbles; 
 
 void setup() 
 {
@@ -39,6 +41,9 @@ void setup()
     fishList[index].maxSpeed = 2;
     leaders[i] = index;
   }
+  
+  foregroundBubbles = new ArrayList<Bubble>();
+  backgroundBubbles = new ArrayList<Bubble>();
 }
 
 void draw() 
@@ -46,6 +51,26 @@ void draw()
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
   rect(0, 0, width, height);
+  
+  float randomNumber = random(0, 1000);
+
+  if(randomNumber > 980) {
+      foregroundBubbles.add(new Bubble( color(int(random(100, 255)), 200)));
+  } 
+  else if(randomNumber < 20) {
+      backgroundBubbles.add(new Bubble( color(int(random(100, 255)), 100)));
+  }
+
+  for(int i = backgroundBubbles.size()-1; i >= 0; i--) {
+      Bubble bubble = backgroundBubbles.get(i);
+      if (bubble.pos.y < -50)
+          backgroundBubbles.remove(i);
+      else {
+          bubble.update();
+          bubble.render();
+      }
+  }
+  
   int m = millis();
   // stupid fucking jank to get around multiple hits on each second
   if(m%1000 < 35)
@@ -98,5 +123,15 @@ void draw()
   {
     fishList[i].update();
     fishList[i].display();
+  }
+  
+  for(int i = foregroundBubbles.size()-1; i >= 0; i--) {
+    Bubble bubble = foregroundBubbles.get(i);
+    if (bubble.pos.y < -50)
+        foregroundBubbles.remove(i);
+    else {
+        bubble.update();
+        bubble.render();
+    }
   }
 }

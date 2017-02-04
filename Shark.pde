@@ -1,5 +1,7 @@
 /**
- *
+ * Shark.pde
+ * 
+ * @author: Brian Clee
  */
 
 class Shark extends Kinematics

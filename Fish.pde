@@ -1,5 +1,7 @@
 /**
+ * Fish.pde
  *
+ * @author: Brian Clee
  */
 
 class Fish extends Kinematics

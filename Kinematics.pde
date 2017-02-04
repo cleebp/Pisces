@@ -1,5 +1,7 @@
 /**
+ * Kinematics.pde
  *
+ * @author: Brian Clee
  */
 
 class Kinematics 
