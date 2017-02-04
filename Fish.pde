@@ -242,7 +242,8 @@ class Fish extends Kinematics
   
   private boolean inBruceRadius() 
   {
-    return dist(pos.x, pos.y, bruce.pos.x, bruce.pos.y) < 150;
+    // 1 dollar for tyler on the random radius
+    return dist(pos.x, pos.y, bruce.pos.x, bruce.pos.y) < random(100,150);
   }
   
   // Draw the fishy on the screen

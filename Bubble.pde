@@ -22,14 +22,8 @@ class Bubble extends Kinematics
         vel.y = -1;
     }
 
-    void render() {
-        /*smooth();
-        stroke(mainColor);
-        strokeWeight(3);
-        noFill();
-        ellipseMode(CENTER);
-        ellipse(pos.x, pos.y, diameter, diameter);*/
-        
+    void render() 
+    {
         stroke(mainColor);
         strokeWeight(3);
         noFill();
@@ -40,9 +34,9 @@ class Bubble extends Kinematics
         popMatrix();
     }
 
-    void update() {
+    void update() 
+    {
       vel.x = random(-0.4, 0.4);
-      //super.update();
       float speed = scale(vel.mag(), maxSpeed);
       vel.normalize();
       vel.mult(speed);
