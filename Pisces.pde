@@ -44,7 +44,7 @@ void setup()
     leaders[i] = index;
   }
   
-  dolphins = new Dolphin[5];
+  dolphins = new Dolphin[4];
   for(int i = 0; i < dolphins.length; i++)
   {
     dolphins[i] = new Dolphin(0, int(random(height)));
@@ -119,15 +119,15 @@ void draw()
   }
   else if(!bruce.lives())
   {
-    if(dolphins[0].lives())
+    for(int i = 0; i < dolphins.length; i++)
     {
-      for(int i = 0; i < dolphins.length; i++)
+      if(dolphins[i].lives())
       {
         dolphins[i].update();
         dolphins[i].display();
       }
     }
-    else if (bruce.longLife())
+    if (bruce.longLife())
     {
       bruce.revive();
       bruce.update();
@@ -137,7 +137,7 @@ void draw()
   
   
   // every 20 seconds chose a new leader to follow
-  if(m%20000 == 0 && !dolphins[0].lives())
+  if(m%20000 == 0 && !dolphins[0].lives() && bruce.lives())
   {
     bruce.goal.pos = fishList[leaders[int(random(leaders.length))]].pos;
     bruce.update();

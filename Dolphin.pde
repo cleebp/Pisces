@@ -13,7 +13,7 @@ class Dolphin extends Kinematics
   float maxAccel = .5;
   float maxAngularAccel = 0.01;
   
-  float radiusOfSat = 40;
+  float radiusOfSat = 70;
   float radiusOfDecel = 120;
   float radiusOfSat_rot = PI/32;
   float radiusOfDecel_rot = PI/4;
@@ -37,7 +37,7 @@ class Dolphin extends Kinematics
   {
     super(x, y);
     pos = new PVector(x, y);
-    c = color(80, 0, 80);
+    c = color(163, 0, 138);
     or = 0;
     vel = new PVector(maxSpeed, 0);
     linear_acceleration = new PVector(0, 0);

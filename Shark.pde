@@ -218,11 +218,8 @@ class Shark extends Kinematics
     long dtime = millis() - life_time;
     //change this to change how long bruce exists before dolphins
     //and similarily how long bruce remains dead once he leaves
-    if(dtime%50000 < 35)
-    {
-      println("Long life!");
+    if(dtime%60000 < 35)
       return true;
-    }
     else
       return false;
   }
