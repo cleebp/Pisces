@@ -37,7 +37,7 @@ class Dolphin extends Kinematics
   {
     super(x, y);
     pos = new PVector(x, y);
-    c = color(163, 0, 138);
+    c = color(70, 0, 155);//(163, 0, 138);
     or = 0;
     vel = new PVector(maxSpeed, 0);
     linear_acceleration = new PVector(0, 0);

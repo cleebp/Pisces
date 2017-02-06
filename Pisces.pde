@@ -44,10 +44,12 @@ void setup()
     leaders[i] = index;
   }
   
-  dolphins = new Dolphin[4];
+  dolphins = new Dolphin[5];
   for(int i = 0; i < dolphins.length; i++)
   {
     dolphins[i] = new Dolphin(0, int(random(height)));
+    dolphins[i].maxSpeed = random(1.5) + 3.5;
+    dolphins[i].c = color(int(random(50,100)),0,155);
   }
   
   foregroundBubbles = new ArrayList<Bubble>();
