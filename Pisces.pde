@@ -7,6 +7,8 @@
 Fish[] fishList;
 Shark bruce;
 
+Dolphin[] dolphins;
+
 int trails = 69; // original 20, higher = less trail
 int[] leaders;
 
@@ -40,6 +42,12 @@ void setup()
     fishList[index].c = color(0, 0, 0);
     fishList[index].maxSpeed = 2;
     leaders[i] = index;
+  }
+  
+  dolphins = new Dolphin[5];
+  for(int i = 0; i < dolphins.length; i++)
+  {
+    dolphins[i] = new Dolphin(0, int(random(height)));
   }
   
   foregroundBubbles = new ArrayList<Bubble>();
@@ -80,22 +88,56 @@ void draw()
   if(m%1000 < 35)
     m -= m%1000;
   
-  
-  if(bruce.lives())
+  // this logic could be cleaned up but you know whatever
+  if(bruce.lives() && !dolphins[0].lives())
+  {
+    if(bruce.longLife())
+    {
+      PVector goal = new PVector(width, int(random(height)));
+      for(int i = 0; i < dolphins.length; i++)
+      {
+        dolphins[i].goal.pos = goal;
+        dolphins[i].spawn();
+        dolphins[i].update();
+        dolphins[i].display();
+      }
+      bruce.goal.pos = goal;
+    }
+    bruce.update();
+    bruce.display();
+  }
+  else if(bruce.lives() && dolphins[0].lives())
   {
     if(bruce.update())
       bruce.display();
+      
+    for(int i = 0; i < dolphins.length; i++)
+    {
+      dolphins[i].update();
+      dolphins[i].display();
+    }
   }
-  /** this bit isn't needed if the shark doesn't die
-  else if(m%50000 == 0)
+  else if(!bruce.lives())
   {
-    bruce.revive();
-    bruce.update();
-    bruce.display();
-  }*/
+    if(dolphins[0].lives())
+    {
+      for(int i = 0; i < dolphins.length; i++)
+      {
+        dolphins[i].update();
+        dolphins[i].display();
+      }
+    }
+    else if (bruce.longLife())
+    {
+      bruce.revive();
+      bruce.update();
+      bruce.display();
+    }
+  }
+  
   
   // every 20 seconds chose a new leader to follow
-  if(m%20000 == 0)
+  if(m%20000 == 0 && !dolphins[0].lives())
   {
     bruce.goal.pos = fishList[leaders[int(random(leaders.length))]].pos;
     bruce.update();
