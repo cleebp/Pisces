@@ -15,15 +15,18 @@ int[] leaders;
 
 ArrayList<Bubble> foregroundBubbles;
 ArrayList<Bubble> backgroundBubbles; 
+PImage info;
 
 void setup() 
 {
+  info = loadImage("info.png");
   background(2, 37, 94);
-  fullScreen();
-  modifier = displayWidth / 1000;
+  //fullScreen();
+  //modifier = displayWidth / 1000;
   println("Size modifier = " + modifier);
   //size(displayWidth, displayHeight);
-  //size(1280,800);
+  size(2880,2400);
+  modifier = 2;
   
   //spawn a shark at a random point on the left side of the screen
   bruce = new Shark(0, int(random(height)));
@@ -64,9 +67,10 @@ void setup()
 
 void draw() 
 {
+  image(info,0,0);
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
-  rect(0, 0, width, height);
+  rect(0, 400, width, height);
   
   float randomNumber = random(0, 1000);
 
@@ -86,7 +90,7 @@ void draw()
   for(int i = backgroundBubbles.size()-1; i >= 0; i--) 
   {
     Bubble bubble = backgroundBubbles.get(i);
-    if (bubble.pos.y < -50)
+    if (bubble.pos.y < 400)
       backgroundBubbles.remove(i);
     else 
     {

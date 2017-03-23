@@ -50,7 +50,7 @@ class Shark extends Kinematics
   {
     if(dolphins[0].exists)
     {
-      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0) 
+      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 400) 
       {
         exists = false;
         life_time = millis();
@@ -80,7 +80,7 @@ class Shark extends Kinematics
     {
       pos.y = 0;
     }
-    if(pos.y < 0) 
+    if(pos.y < 400) 
     {
       pos.y = height;
     }
