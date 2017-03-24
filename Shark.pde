@@ -34,12 +34,12 @@ class Shark extends Kinematics
   {
     super(x, y);
     pos = new PVector(x, y);
-    c = color(88, 0, 0);
+    c = color(155, 0, 0);
     or = 0;
     vel = new PVector(maxSpeed, 0);
     linear_acceleration = new PVector(0, 0);
-    
-    goal = new Kinematics(width, int(random(height)));
+
+    goal = new Kinematics(width, int(random(420,height-400)));
     last_update = millis();
     life_time = millis();
     exists = true;
@@ -50,7 +50,7 @@ class Shark extends Kinematics
   {
     if(dolphins[0].exists)
     {
-      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 400) 
+      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 420) 
       {
         exists = false;
         life_time = millis();
@@ -80,7 +80,7 @@ class Shark extends Kinematics
     {
       pos.y = 0;
     }
-    if(pos.y < 400) 
+    if(pos.y < 420) 
     {
       pos.y = height;
     }

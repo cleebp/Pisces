@@ -60,7 +60,7 @@ class Fish extends Kinematics
     {
       pos.y = 0;
     }
-    if(pos.y < 400) 
+    if(pos.y < 420) 
     {
       pos.y = height;
     }

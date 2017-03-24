@@ -16,17 +16,19 @@ int[] leaders;
 ArrayList<Bubble> foregroundBubbles;
 ArrayList<Bubble> backgroundBubbles; 
 PImage info;
+PFont font;
 
 void setup() 
 {
   info = loadImage("info.png");
+  font = createFont("Ariel",16,true);
   background(2, 37, 94);
   //fullScreen();
   //modifier = displayWidth / 1000;
-  println("Size modifier = " + modifier);
   //size(displayWidth, displayHeight);
-  size(2880,2400);
-  modifier = 2;
+  size(2880,1950,P3D);//2880,2400 = commons wall
+  frameRate(30);
+  modifier = 3;
   
   //spawn a shark at a random point on the left side of the screen
   bruce = new Shark(0, int(random(height)));
@@ -39,7 +41,8 @@ void setup()
     fishList[i] = new Fish(int(random(width)), int(random(height)));
     fishList[i].targets = fishList;
     fishList[i].maxSpeed = random(1.5) + 2.5;
-    fishList[i].c = color(0, 0, int(pow(fishList[i].maxSpeed, 4)));
+    //println("color: " + int(pow(fishList[i].maxSpeed, 4)));
+    fishList[i].c = color(0, 0, int(random(100,255)));
     fishList[i].modifier = modifier;
   }
   
@@ -47,7 +50,7 @@ void setup()
   {
     int index = int(random(fishList.length));
     fishList[index].leader = true;
-    fishList[index].c = color(0, 0, 0);
+    fishList[index].c = color(0, 0, 60);
     fishList[index].maxSpeed = 2;
     leaders[i] = index;
   }
@@ -57,7 +60,8 @@ void setup()
   {
     dolphins[i] = new Dolphin(0, int(random(height)));
     dolphins[i].maxSpeed = random(1.5) + 3.5;
-    dolphins[i].c = color(int(random(50,100)),0,155);
+    int purp = int(random(130,175));
+    dolphins[i].c = color(purp,0,purp);
     dolphins[i].modifier = modifier;
   }
   
@@ -73,6 +77,11 @@ void draw()
   rect(0, 400, width, height);
   
   float randomNumber = random(0, 1000);
+
+  //print fps top right
+  textFont(font,16);
+  fill(255);
+  text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {
@@ -90,7 +99,7 @@ void draw()
   for(int i = backgroundBubbles.size()-1; i >= 0; i--) 
   {
     Bubble bubble = backgroundBubbles.get(i);
-    if (bubble.pos.y < 400)
+    if (bubble.pos.y < 0)
       backgroundBubbles.remove(i);
     else 
     {
@@ -167,7 +176,8 @@ void draw()
     {
       int index = leaders[i];
       fishList[index].leader = false;
-      fishList[index].c = color(0, 0, int(pow(fishList[i].maxSpeed, 4)));
+      //fishList[index].c = color(0, 0, int(pow(fishList[i].maxSpeed, 4)));
+      fishList[index].c = color(0, 0, int(random(100,255)));
       fishList[index].maxSpeed = random(1.5) + 2.5;
     }
     
@@ -175,7 +185,7 @@ void draw()
     {
       int index = int(random(fishList.length));
       fishList[index].leader = true;
-      fishList[index].c = color(0, 0, 0);
+      fishList[index].c = color(0, 0, 60);
       fishList[index].maxSpeed = 2;
       leaders[i] = index;
     }
