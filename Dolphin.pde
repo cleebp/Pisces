@@ -52,7 +52,7 @@ class Dolphin extends Kinematics
   {
     if(!bruce.lives())
     {
-      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0) 
+      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 420) 
       {
         exists = false;
       }

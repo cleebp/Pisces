@@ -4,6 +4,8 @@
  * @author: Brian Clee | bpclee@ncsu.edu
  */
  
+public double worldStart;
+public double lastUpdateTime;
 Fish[] fishList;
 Shark bruce;
 
@@ -20,6 +22,11 @@ PFont font;
 
 void setup() 
 {
+  //start of our world
+  worldStart = TimeUtil.systemSeconds();
+  lastUpdateTime = worldStart;
+  println("Time 0: " + lastUpdateTime);
+  
   info = loadImage("info.png");
   font = createFont("Ariel",16,true);
   background(2, 37, 94);
@@ -71,6 +78,12 @@ void setup()
 
 void draw() 
 {
+  double deltaT = TimeUtil.systemSeconds() - lastUpdateTime;
+  lastUpdateTime += deltaT;
+  double elapsedT = TimeUtil.systemSeconds() - worldStart;
+  println("New last update: " + lastUpdateTime);
+  println("Elapsed: " + elapsedT);
+  
   image(info,0,0);
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
