@@ -5,7 +5,8 @@
  */
  
 public double worldStart;
-public double lastUpdateTime;
+public double elapsed10;
+public double elapsed60;
 Fish[] fishList;
 Shark bruce;
 
@@ -24,8 +25,8 @@ void setup()
 {
   //start of our world
   worldStart = TimeUtil.systemSeconds();
-  lastUpdateTime = worldStart;
-  println("Time 0: " + lastUpdateTime);
+  elapsed10 = worldStart;
+  elapsed60 = worldStart;
   
   info = loadImage("info.png");
   font = createFont("Ariel",16,true);
@@ -78,11 +79,25 @@ void setup()
 
 void draw() 
 {
-  double deltaT = TimeUtil.systemSeconds() - lastUpdateTime;
-  lastUpdateTime += deltaT;
-  double elapsedT = TimeUtil.systemSeconds() - worldStart;
-  println("New last update: " + lastUpdateTime);
-  println("Elapsed: " + elapsedT);
+  double currentTime = TimeUtil.systemSeconds();
+  elapsed10 = currentTime - elapsed10;
+  elapsed60 = currentTime - elapsed60;
+  
+  boolean ten = false;
+  boolean sixty = false;
+  //this actually happens every 20 seconds and 120 seconds because im capping at 30 fps... #featurenotabug
+  if(elapsed10 > 10.0 && elapsed10 < 100)
+  {
+    print("10 seconds!");
+    ten = true;
+    elapsed10 = currentTime;
+  }
+  if(elapsed60 > 60.0 && elapsed60 < 100)
+  {
+    print("60 seconds!");
+    sixty = true; 
+    elapsed60 = currentTime;
+  }
   
   image(info,0,0);
   // draws a semi-transparent rectangle over the window to create fading trails
@@ -121,15 +136,10 @@ void draw()
     }
   }
   
-  int m = millis();
-  // stupid fucking jank to get around multiple hits on each second
-  if(m%1000 < 35)
-    m -= m%1000;
-  
   // this logic could be cleaned up but you know whatever
   if(bruce.lives() && !dolphins[0].lives())
   {
-    if(bruce.longLife())
+    if(sixty)
     {
       PVector goal = new PVector(width, int(random(height)));
       for(int i = 0; i < dolphins.length; i++)
@@ -165,7 +175,7 @@ void draw()
         dolphins[i].display();
       }
     }
-    if (bruce.longLife())
+    if (sixty)
     {
       bruce.revive();
       bruce.update();
@@ -175,7 +185,7 @@ void draw()
   
   
   // every 20 seconds chose a new leader to follow
-  if(m%20000 == 0 && !dolphins[0].lives() && bruce.lives())
+  if(ten && !dolphins[0].lives() && bruce.lives())
   {
     bruce.goal.pos = fishList[leaders[int(random(leaders.length))]].pos;
     bruce.update();
@@ -183,7 +193,7 @@ void draw()
   }
   
   // every 10 seconds shuffle the leaders
-  if(m%10000 == 0)
+  if(ten)
   {
     for(int i = 0; i < leaders.length; i++)
     {

@@ -39,7 +39,7 @@ class Shark extends Kinematics
     vel = new PVector(maxSpeed, 0);
     linear_acceleration = new PVector(0, 0);
 
-    goal = new Kinematics(width, int(random(420,height-400)));
+    goal = new Kinematics(width, int(random(500,(height-400))));
     last_update = millis();
     life_time = millis();
     exists = true;
@@ -206,22 +206,12 @@ class Shark extends Kinematics
     exists = true;
     life_time = millis();
     pos = new PVector(0, int(random(height)));
+    goal = new Kinematics(width, int(random(420,height-400)));
   }
   
   boolean lives()
   {
     return exists;
-  }
-  
-  boolean longLife()
-  {
-    long dtime = millis() - life_time;
-    //change this to change how long bruce exists before dolphins
-    //and similarily how long bruce remains dead once he leaves
-    if(dtime%60000 < 35)
-      return true;
-    else
-      return false;
   }
   
   void display() 
