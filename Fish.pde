@@ -50,17 +50,17 @@ class Fish extends Kinematics
   {
     if(pos.x > width) 
     {
-      pos.x = 0;
+      pos.x = canvas_x;
     }
-    if(pos.x < 0) 
+    if(pos.x < canvas_x) 
     {
       pos.x = width;
     }
     if(pos.y > height) 
     {
-      pos.y = 0;
+      pos.y = canvas_y;
     }
-    if(pos.y < 420) 
+    if(pos.y < canvas_y) 
     {
       pos.y = height;
     }

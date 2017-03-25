@@ -14,7 +14,7 @@ class Bubble extends Kinematics
     Bubble(color c) 
     {
         super(0,0); //0.8, 0.2, new PVector(0, -1)); 
-        pos = new PVector(int(random(width)), height);
+        pos = new PVector(int(random(canvas_x,width)), height);
         diameter = int(random(30, 50));        
         maxSpeed = 1;
         mainColor = c;

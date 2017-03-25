@@ -7,9 +7,14 @@
 public double worldStart;
 public double elapsed10;
 public double elapsed60;
+String display;
+PImage info;
+PFont font;
+public int canvas_x = 0;
+public int canvas_y = 0;
+
 Fish[] fishList;
 Shark bruce;
-
 Dolphin[] dolphins;
 
 int modifier;
@@ -18,8 +23,6 @@ int[] leaders;
 
 ArrayList<Bubble> foregroundBubbles;
 ArrayList<Bubble> backgroundBubbles; 
-PImage info;
-PFont font;
 
 void setup() 
 {
@@ -27,26 +30,62 @@ void setup()
   worldStart = TimeUtil.systemSeconds();
   elapsed10 = worldStart;
   elapsed60 = worldStart;
+  println("width = " + displayWidth);
+  println("height = " + displayHeight);
   
-  info = loadImage("info.png");
+  if(displayWidth == 6816)
+  {
+    //immersion theater
+    display = "immersion";
+    info = loadImage("info_immersion.png");
+    modifier = 3;
+    //canvas_x = 960;
+    canvas_x = 980;
+  }
+  else if (displayWidth == 5760)
+  {
+    //artwall
+    display = "artwall";
+    info = loadImage("info_artwall.png");
+    modifier = 3;
+    //canvas_x = 960;
+    canvas_x = 980;
+  }
+  else if (displayWidth == 2880 || displayWidth == 3840)
+  {
+    //commons
+    display = "commons";
+    info = loadImage("info_commons.png");
+    modifier = 3;
+    //canvas_y = 400;
+    canvas_y = 420;
+  }
+  else 
+  {
+    //macbook
+    display = "macbook";
+    //info = loadImage("info_commons");
+    info = loadImage("info_commons.png");
+    canvas_y = 420;
+    modifier = 2;
+  }
+  
   font = createFont("Ariel",16,true);
-  background(2, 37, 94);
-  //fullScreen();
-  //modifier = displayWidth / 1000;
-  //size(displayWidth, displayHeight);
-  size(2880,1950,P3D);//2880,2400 = commons wall
+  background(2, 37, 94); //<>//
+  fullScreen(P3D);
   frameRate(30);
-  modifier = 3;
   
   //spawn a shark at a random point on the left side of the screen
-  bruce = new Shark(0, int(random(height)));
+  bruce = new Shark(canvas_y, int(random(height)));
   bruce.modifier = modifier;
   
   fishList = new Fish[500];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
-    fishList[i] = new Fish(int(random(width)), int(random(height)));
+    int x = int(random(canvas_x, width));
+    int y = int(random(canvas_y, height));
+    fishList[i] = new Fish(x, y);
     fishList[i].targets = fishList;
     fishList[i].maxSpeed = random(1.5) + 2.5;
     //println("color: " + int(pow(fishList[i].maxSpeed, 4)));
@@ -66,7 +105,7 @@ void setup()
   dolphins = new Dolphin[5];
   for(int i = 0; i < dolphins.length; i++)
   {
-    dolphins[i] = new Dolphin(0, int(random(height)));
+    dolphins[i] = new Dolphin(canvas_y, int(random(height)));
     dolphins[i].maxSpeed = random(1.5) + 3.5;
     int purp = int(random(130,175));
     dolphins[i].c = color(purp,0,purp);
@@ -99,10 +138,10 @@ void draw()
     elapsed60 = currentTime;
   }
   
-  image(info,0,0);
+  image(info,0,0); //<>//
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
-  rect(0, 400, width, height);
+  rect(0, 0, width, height);
   
   float randomNumber = random(0, 1000);
 
@@ -127,7 +166,7 @@ void draw()
   for(int i = backgroundBubbles.size()-1; i >= 0; i--) 
   {
     Bubble bubble = backgroundBubbles.get(i);
-    if (bubble.pos.y < 0)
+    if (bubble.pos.y < -50)
       backgroundBubbles.remove(i);
     else 
     {
@@ -141,7 +180,7 @@ void draw()
   {
     if(sixty)
     {
-      PVector goal = new PVector(width, int(random(height)));
+      PVector goal = new PVector(width, int(random(canvas_y,height)));
       for(int i = 0; i < dolphins.length; i++)
       {
         dolphins[i].goal.pos = goal;

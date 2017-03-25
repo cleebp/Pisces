@@ -52,7 +52,7 @@ class Dolphin extends Kinematics
   {
     if(!bruce.lives())
     {
-      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 420) 
+      if(pos.x > width || pos.x < canvas_x || pos.y > height || pos.y < canvas_y) 
       {
         exists = false;
       }
@@ -68,17 +68,17 @@ class Dolphin extends Kinematics
     }
     if(pos.x > width) 
     {
-      pos.x = 0;
+      pos.x = canvas_x;
     }
-    if(pos.x < 0) 
+    if(pos.x < canvas_x) 
     {
       pos.x = width;
     }
     if(pos.y > height) 
     {
-      pos.y = 0;
+      pos.y = canvas_y;
     }
-    if(pos.y < 420) 
+    if(pos.y < canvas_y) 
     {
       pos.y = height;
     }
@@ -317,7 +317,7 @@ class Dolphin extends Kinematics
   void spawn()
   {
     exists = true;
-    pos = new PVector(0, int(random(height)));
+    pos = new PVector(canvas_y, int(random(canvas_x,height)));
   }
   
   // Draw the fishy on the screen
