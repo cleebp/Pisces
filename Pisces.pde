@@ -64,10 +64,9 @@ void setup()
   {
     //macbook
     display = "macbook";
-    //info = loadImage("info_commons");
-    info = loadImage("info_commons.png");
-    canvas_y = 420;
-    modifier = 2;
+    info = loadImage("info_macbook.png");
+    canvas_y = 220;
+    modifier = 1;
   }
   
   font = createFont("Ariel",16,true);
