@@ -1,5 +1,5 @@
 /**
- * pisces.pde
+ * source.pde
  * 
  * @author: Brian Clee | bpclee@ncsu.edu
  */
@@ -72,6 +72,7 @@ void setup()
   font = createFont("Ariel",16,true);
   background(2, 37, 94); //<>//
   fullScreen(P3D);
+  //size(1440,900,P3D);
   frameRate(30);
   
   //spawn a shark at a random point on the left side of the screen
@@ -145,9 +146,9 @@ void draw()
   float randomNumber = random(0, 1000);
 
   //print fps top right
-  textFont(font,16);
-  fill(255);
-  text("FPS: " + frameRate,10,25);
+  //textFont(font,16);
+  //fill(255);
+  //text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {
