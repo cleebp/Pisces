@@ -13,7 +13,7 @@ class Dolphin extends Kinematics
   float maxAccel = .5;
   float maxAngularAccel = 0.01;
   
-  float radiusOfSat = 70*modifier;
+  float radiusOfSat = 100*modifier;
   float radiusOfDecel = 120;
   float radiusOfSat_rot = PI/32;
   float radiusOfDecel_rot = PI/4;
@@ -52,7 +52,7 @@ class Dolphin extends Kinematics
   {
     if(!bruce.lives())
     {
-      if(pos.x > width || pos.x < 0 || pos.y > height || pos.y < 0) 
+      if(pos.x > width || pos.x < canvas_x || pos.y > height || pos.y < canvas_y) 
       {
         exists = false;
       }
@@ -68,17 +68,17 @@ class Dolphin extends Kinematics
     }
     if(pos.x > width) 
     {
-      pos.x = 0;
+      pos.x = canvas_x;
     }
-    if(pos.x < 0) 
+    if(pos.x < canvas_x) 
     {
       pos.x = width;
     }
     if(pos.y > height) 
     {
-      pos.y = 0;
+      pos.y = canvas_y;
     }
-    if(pos.y < 0) 
+    if(pos.y < canvas_y) 
     {
       pos.y = height;
     }
@@ -317,7 +317,7 @@ class Dolphin extends Kinematics
   void spawn()
   {
     exists = true;
-    pos = new PVector(0, int(random(height)));
+    pos = new PVector(canvas_y, int(random(canvas_x,height)));
   }
   
   // Draw the fishy on the screen
@@ -327,7 +327,8 @@ class Dolphin extends Kinematics
     pushMatrix();
     translate(pos.x,pos.y);
     rotate(or);
-    triangle(6*modifier, -20*modifier, 40*modifier, 0, 6*modifier, 20*modifier);
+    ellipse(0, 0, 30*modifier, 30*modifier);
+    triangle(4.5*modifier, -15*modifier, 30*modifier, 0, 4.5*modifier, 15*modifier);
     popMatrix();
   }
 }
