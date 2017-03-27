@@ -33,14 +33,14 @@ void setup()
   println("width = " + displayWidth);
   println("height = " + displayHeight);
   
-  if(displayWidth == 6816)
+  if(displayWidth == 6816 || displayWidth == 3840)
   {
     //immersion theater
     display = "immersion";
     info = loadImage("info_immersion.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
   }
   else if (displayWidth == 5760)
   {
@@ -49,9 +49,9 @@ void setup()
     info = loadImage("info_artwall.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
   }
-  else if (displayWidth == 2880 || displayWidth == 3840)
+  else if (displayWidth == 2880)
   {
     //commons
     display = "commons";
@@ -69,7 +69,7 @@ void setup()
     modifier = 1;
   }
   
-  font = createFont("Ariel",16,true);
+  font = createFont("Ariel",32,true);
   background(2, 37, 94); //<>//
   fullScreen(P3D);
   //size(1440,900,P3D);
@@ -79,7 +79,7 @@ void setup()
   bruce = new Shark(canvas_y, int(random(height)));
   bruce.modifier = modifier;
   
-  fishList = new Fish[500];
+  fishList = new Fish[1000];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
@@ -145,10 +145,10 @@ void draw()
   
   float randomNumber = random(0, 1000);
 
-  //print fps top right
-  //textFont(font,16);
-  //fill(255);
-  //text("FPS: " + frameRate,10,25);
+  //print fps top left
+  textFont(font,32);
+  fill(255);
+  text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {
