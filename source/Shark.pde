@@ -205,7 +205,7 @@ class Shark extends Kinematics
   {
     exists = true;
     //life_time = millis();
-    pos = new PVector(0, int(random(height)));
+    pos = new PVector(canvas_x, int(random(height)));
     goal = new Kinematics(width, int(random(420,height-400)));
   }
   

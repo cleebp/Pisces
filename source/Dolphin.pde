@@ -317,7 +317,7 @@ class Dolphin extends Kinematics
   void spawn()
   {
     exists = true;
-    pos = new PVector(canvas_y, int(random(canvas_x,height)));
+    pos = new PVector(canvas_x, int(random(canvas_x,height)));
   }
   
   // Draw the fishy on the screen

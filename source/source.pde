@@ -32,6 +32,7 @@ void setup()
   elapsed60 = worldStart;
   println("width = " + displayWidth);
   println("height = " + displayHeight);
+  int numFish = 0;
   
   if(displayWidth == 6816 || displayWidth == 3840)
   {
@@ -41,6 +42,7 @@ void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
+    numFish = 2000;
   }
   else if (displayWidth == 5760)
   {
@@ -50,6 +52,7 @@ void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
+    numFish = 1500;
   }
   else if (displayWidth == 2880)
   {
@@ -59,6 +62,7 @@ void setup()
     modifier = 3;
     //canvas_y = 400;
     canvas_y = 420;
+    numFish = 1000;
   }
   else 
   {
@@ -67,6 +71,7 @@ void setup()
     info = loadImage("info_macbook.png");
     canvas_y = 220;
     modifier = 1;
+    numFish = 1000;
   }
   
   font = createFont("Ariel",32,true);
@@ -79,7 +84,7 @@ void setup()
   bruce = new Shark(canvas_y, int(random(height)));
   bruce.modifier = modifier;
   
-  fishList = new Fish[1000];
+  fishList = new Fish[numFish];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
