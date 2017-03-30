@@ -1,6 +1,6 @@
 # Pisces
 
-![header](https://github.com/cleebp/Pisces/blob/master/source/pisces_screen.png)
+![header](https://github.com/cleebp/Pisces/blob/master/resources/pisces_screen.png)
 
 Pisces is a generative art piece built in [Processing](https://processing.org/). Pisces combines multiple artificial intelligence (AI) path-finding algorithms such as wandering, flocking, and seeking, to produce a procedurally generated AI simulation that is unique each time. 
 
