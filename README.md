@@ -8,7 +8,7 @@ The setting is the ocean, and there are three different kinds of AI agents: a sc
 
 ## Display requirements
 
-Pisces is designed and coded to be displayed on the [Hunt Library display walls]((https://github.com/NCSU-Libraries/visualization_templates/blob/master/HuntLibraryVideoWallGuide.md) (commons, art wall, and immersion). As such if you run Pisces on a different display the sketch will most likely display incorrectly. There is a running condition that is designed to run on a MacBook display (1440x900), this is the default condition for displays that do not have the same display width as the library walls.
+Pisces is designed and coded to be displayed on the [Hunt Library display walls](https://github.com/NCSU-Libraries/visualization_templates/blob/master/HuntLibraryVideoWallGuide.md) (commons, art wall, and immersion). As such if you run Pisces on a different display the sketch will most likely display incorrectly. There is a running condition that is designed to run on a MacBook display (1440x900), this is the default condition for displays that do not have the same display width as the library walls.
 
 ## Software requirements and how to run
 
