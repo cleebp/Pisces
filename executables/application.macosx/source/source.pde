@@ -12,6 +12,7 @@ PImage info;
 PFont font;
 public int canvas_x = 0;
 public int canvas_y = 0;
+public int canvas_height = 0;
 
 Fish[] fishList;
 Shark bruce;
@@ -32,15 +33,18 @@ void setup()
   elapsed60 = worldStart;
   println("width = " + displayWidth);
   println("height = " + displayHeight);
+  int numFish = 0;
+  canvas_height = displayHeight;
   
-  if(displayWidth == 6816)
+  if(displayWidth == 6816 || displayWidth == 3840)
   {
     //immersion theater
     display = "immersion";
     info = loadImage("info_immersion.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
+    numFish = 2000;
   }
   else if (displayWidth == 5760)
   {
@@ -49,27 +53,30 @@ void setup()
     info = loadImage("info_artwall.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
+    numFish = 1500;
   }
-  else if (displayWidth == 2880 || displayWidth == 3840)
+  else if (displayWidth == 2880)
   {
     //commons
     display = "commons";
     info = loadImage("info_commons.png");
     modifier = 3;
     //canvas_y = 400;
-    canvas_y = 420;
+    canvas_height = 1980; //2400 - 420 = 1980, 2400 - 400 = 2400
+    numFish = 1000;
   }
   else 
   {
     //macbook
     display = "macbook";
     info = loadImage("info_macbook.png");
-    canvas_y = 220;
+    canvas_height = 680; //900 - 220 = 680, 900 - 200 = 700
     modifier = 1;
+    numFish = 1000;
   }
   
-  font = createFont("Ariel",16,true);
+  font = createFont("Ariel",32,true);
   background(2, 37, 94);
   fullScreen(P3D);
   //size(1440,900,P3D);
@@ -79,7 +86,7 @@ void setup()
   bruce = new Shark(canvas_y, int(random(height)));
   bruce.modifier = modifier;
   
-  fishList = new Fish[500];
+  fishList = new Fish[numFish];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
@@ -138,17 +145,24 @@ void draw()
     elapsed60 = currentTime;
   }
   
-  image(info,0,0);
+  if(display.equals("macbook") || display.equals("commons"))
+  {
+    image(info,0,canvas_height+20);
+  }
+  else
+  {
+    image(info,0,0);
+  }
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
   rect(0, 0, width, height);
   
   float randomNumber = random(0, 1000);
 
-  //print fps top right
-  //textFont(font,16);
-  //fill(255);
-  //text("FPS: " + frameRate,10,25);
+  //print fps top left
+  textFont(font,32);
+  fill(255);
+  text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {

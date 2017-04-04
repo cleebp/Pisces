@@ -50,7 +50,7 @@ class Shark extends Kinematics
   {
     if(dolphins[0].exists)
     {
-      if(pos.x > width || pos.x < canvas_x || pos.y > height || pos.y < canvas_y) 
+      if(pos.x > width || pos.x < canvas_x || pos.y > canvas_height || pos.y < canvas_y) 
       {
         exists = false;
         //life_time = millis();
@@ -76,13 +76,13 @@ class Shark extends Kinematics
     {
       pos.x = width;
     }
-    if(pos.y > height) 
+    if(pos.y > canvas_height) 
     {
       pos.y = canvas_y;
     }
     if(pos.y < canvas_y) 
     {
-      pos.y = height;
+      pos.y = canvas_height;
     }
     
     wander();
@@ -205,7 +205,7 @@ class Shark extends Kinematics
   {
     exists = true;
     //life_time = millis();
-    pos = new PVector(0, int(random(height)));
+    pos = new PVector(canvas_x, int(random(height)));
     goal = new Kinematics(width, int(random(420,height-400)));
   }
   

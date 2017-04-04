@@ -12,6 +12,7 @@ PImage info;
 PFont font;
 public int canvas_x = 0;
 public int canvas_y = 0;
+public int canvas_height = 0;
 
 Fish[] fishList;
 Shark bruce;
@@ -33,6 +34,7 @@ void setup()
   println("width = " + displayWidth);
   println("height = " + displayHeight);
   int numFish = 0;
+  canvas_height = displayHeight;
   
   if(displayWidth == 6816 || displayWidth == 3840)
   {
@@ -61,7 +63,7 @@ void setup()
     info = loadImage("info_commons.png");
     modifier = 3;
     //canvas_y = 400;
-    canvas_y = 420;
+    canvas_height = 1980; //2400 - 420 = 1980, 2400 - 400 = 2400
     numFish = 1000;
   }
   else 
@@ -69,7 +71,7 @@ void setup()
     //macbook
     display = "macbook";
     info = loadImage("info_macbook.png");
-    canvas_y = 220;
+    canvas_height = 680; //900 - 220 = 680, 900 - 200 = 700
     modifier = 1;
     numFish = 1000;
   }
@@ -143,7 +145,14 @@ void draw()
     elapsed60 = currentTime;
   }
   
-  image(info,0,0); //<>//
+  if(display.equals("macbook") || display.equals("commons"))
+  {
+    image(info,0,canvas_height+20);
+  }
+  else
+  {
+    image(info,0,0); //<>//
+  }
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
   rect(0, 0, width, height);

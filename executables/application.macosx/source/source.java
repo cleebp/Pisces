@@ -28,6 +28,7 @@ PImage info;
 PFont font;
 public int canvas_x = 0;
 public int canvas_y = 0;
+public int canvas_height = 0;
 
 Fish[] fishList;
 Shark bruce;
@@ -48,15 +49,18 @@ public void setup()
   elapsed60 = worldStart;
   println("width = " + displayWidth);
   println("height = " + displayHeight);
+  int numFish = 0;
+  canvas_height = displayHeight;
   
-  if(displayWidth == 6816)
+  if(displayWidth == 6816 || displayWidth == 3840)
   {
     //immersion theater
     display = "immersion";
     info = loadImage("info_immersion.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
+    numFish = 2000;
   }
   else if (displayWidth == 5760)
   {
@@ -65,27 +69,30 @@ public void setup()
     info = loadImage("info_artwall.png");
     modifier = 3;
     //canvas_x = 960;
-    canvas_x = 980;
+    canvas_x = 985;
+    numFish = 1500;
   }
-  else if (displayWidth == 2880 || displayWidth == 3840)
+  else if (displayWidth == 2880)
   {
     //commons
     display = "commons";
     info = loadImage("info_commons.png");
     modifier = 3;
     //canvas_y = 400;
-    canvas_y = 420;
+    canvas_height = 1980; //2400 - 420 = 1980, 2400 - 400 = 2400
+    numFish = 1000;
   }
   else 
   {
     //macbook
     display = "macbook";
     info = loadImage("info_macbook.png");
-    canvas_y = 220;
+    canvas_height = 680; //900 - 220 = 680, 900 - 200 = 700
     modifier = 1;
+    numFish = 1000;
   }
   
-  font = createFont("Ariel",16,true);
+  font = createFont("Ariel",32,true);
   background(2, 37, 94);
   
   //size(1440,900,P3D);
@@ -95,7 +102,7 @@ public void setup()
   bruce = new Shark(canvas_y, PApplet.parseInt(random(height)));
   bruce.modifier = modifier;
   
-  fishList = new Fish[500];
+  fishList = new Fish[numFish];
   leaders = new int[fishList.length/100];
   for(int i = 0; i < fishList.length; i++) 
   {
@@ -154,17 +161,24 @@ public void draw()
     elapsed60 = currentTime;
   }
   
-  image(info,0,0);
+  if(display.equals("macbook") || display.equals("commons"))
+  {
+    image(info,0,canvas_height+20);
+  }
+  else
+  {
+    image(info,0,0);
+  }
   // draws a semi-transparent rectangle over the window to create fading trails
   fill(2, 37, 94, trails);
   rect(0, 0, width, height);
   
   float randomNumber = random(0, 1000);
 
-  //print fps top right
-  //textFont(font,16);
-  //fill(255);
-  //text("FPS: " + frameRate,10,25);
+  //print fps top left
+  textFont(font,32);
+  fill(255);
+  text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {
@@ -395,7 +409,7 @@ class Dolphin extends Kinematics
   {
     if(!bruce.lives())
     {
-      if(pos.x > width || pos.x < canvas_x || pos.y > height || pos.y < canvas_y) 
+      if(pos.x > width || pos.x < canvas_x || pos.y > canvas_height || pos.y < canvas_y) 
       {
         exists = false;
       }
@@ -417,13 +431,13 @@ class Dolphin extends Kinematics
     {
       pos.x = width;
     }
-    if(pos.y > height) 
+    if(pos.y > canvas_height) 
     {
       pos.y = canvas_y;
     }
     if(pos.y < canvas_y) 
     {
-      pos.y = height;
+      pos.y = canvas_height;
     }
     
     if(bruce.lives() && inRadius(bruce.pos)) 
@@ -660,7 +674,7 @@ class Dolphin extends Kinematics
   public void spawn()
   {
     exists = true;
-    pos = new PVector(canvas_y, PApplet.parseInt(random(canvas_x,height)));
+    pos = new PVector(canvas_x, PApplet.parseInt(random(canvas_x,height)));
   }
   
   // Draw the fishy on the screen
@@ -733,13 +747,13 @@ class Fish extends Kinematics
     {
       pos.x = width;
     }
-    if(pos.y > height) 
+    if(pos.y > canvas_height) 
     {
       pos.y = canvas_y;
     }
     if(pos.y < canvas_y) 
     {
-      pos.y = height;
+      pos.y = canvas_height;
     }
     
     Kinematics c = getClosest((Kinematics)this, targets);
@@ -1009,7 +1023,7 @@ class Shark extends Kinematics
   {
     if(dolphins[0].exists)
     {
-      if(pos.x > width || pos.x < canvas_x || pos.y > height || pos.y < canvas_y) 
+      if(pos.x > width || pos.x < canvas_x || pos.y > canvas_height || pos.y < canvas_y) 
       {
         exists = false;
         //life_time = millis();
@@ -1035,13 +1049,13 @@ class Shark extends Kinematics
     {
       pos.x = width;
     }
-    if(pos.y > height) 
+    if(pos.y > canvas_height) 
     {
       pos.y = canvas_y;
     }
     if(pos.y < canvas_y) 
     {
-      pos.y = height;
+      pos.y = canvas_height;
     }
     
     wander();
@@ -1164,7 +1178,7 @@ class Shark extends Kinematics
   {
     exists = true;
     //life_time = millis();
-    pos = new PVector(0, PApplet.parseInt(random(height)));
+    pos = new PVector(canvas_x, PApplet.parseInt(random(height)));
     goal = new Kinematics(width, PApplet.parseInt(random(420,height-400)));
   }
   

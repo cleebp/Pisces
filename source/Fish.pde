@@ -56,13 +56,13 @@ class Fish extends Kinematics
     {
       pos.x = width;
     }
-    if(pos.y > height) 
+    if(pos.y > canvas_height) 
     {
       pos.y = canvas_y;
     }
     if(pos.y < canvas_y) 
     {
-      pos.y = height;
+      pos.y = canvas_height;
     }
     
     Kinematics c = getClosest((Kinematics)this, targets);
