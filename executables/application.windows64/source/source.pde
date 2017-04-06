@@ -35,6 +35,7 @@ void setup()
   println("height = " + displayHeight);
   int numFish = 0;
   canvas_height = displayHeight;
+  noCursor();
   
   if(displayWidth == 6816 || displayWidth == 3840)
   {
@@ -44,7 +45,7 @@ void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 2000;
+    numFish = 1500;
   }
   else if (displayWidth == 5760)
   {
@@ -78,7 +79,7 @@ void setup()
   
   font = createFont("Ariel",32,true);
   background(2, 37, 94);
-  fullScreen(P3D);
+  fullScreen(P3D,2);
   //size(1440,900,P3D);
   frameRate(30);
   
@@ -96,7 +97,7 @@ void setup()
     fishList[i].targets = fishList;
     fishList[i].maxSpeed = random(1.5) + 2.5;
     //println("color: " + int(pow(fishList[i].maxSpeed, 4)));
-    fishList[i].c = color(0, 0, int(random(100,255)));
+    fishList[i].c = color(0, 0, int(random(155,235)));
     fishList[i].modifier = modifier;
   }
   
@@ -104,7 +105,7 @@ void setup()
   {
     int index = int(random(fishList.length));
     fishList[index].leader = true;
-    fishList[index].c = color(0, 0, 60);
+    fishList[index].c = color(0, 0, int(random(135,155)));
     fishList[index].maxSpeed = 2;
     leaders[i] = index;
   }
@@ -253,7 +254,7 @@ void draw()
       int index = leaders[i];
       fishList[index].leader = false;
       //fishList[index].c = color(0, 0, int(pow(fishList[i].maxSpeed, 4)));
-      fishList[index].c = color(0, 0, int(random(100,255)));
+      fishList[index].c = color(0, 0, int(random(155,235)));
       fishList[index].maxSpeed = random(1.5) + 2.5;
     }
     
@@ -261,7 +262,7 @@ void draw()
     {
       int index = int(random(fishList.length));
       fishList[index].leader = true;
-      fishList[index].c = color(0, 0, 60);
+      fishList[index].c = color(0, 0, int(random(135,155)));
       fishList[index].maxSpeed = 2;
       leaders[i] = index;
     }

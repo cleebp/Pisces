@@ -51,6 +51,7 @@ public void setup()
   println("height = " + displayHeight);
   int numFish = 0;
   canvas_height = displayHeight;
+  noCursor();
   
   if(displayWidth == 6816 || displayWidth == 3840)
   {
@@ -60,7 +61,7 @@ public void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 2000;
+    numFish = 1500;
   }
   else if (displayWidth == 5760)
   {
@@ -112,7 +113,7 @@ public void setup()
     fishList[i].targets = fishList;
     fishList[i].maxSpeed = random(1.5f) + 2.5f;
     //println("color: " + int(pow(fishList[i].maxSpeed, 4)));
-    fishList[i].c = color(0, 0, PApplet.parseInt(random(100,255)));
+    fishList[i].c = color(0, 0, PApplet.parseInt(random(155,235)));
     fishList[i].modifier = modifier;
   }
   
@@ -120,7 +121,7 @@ public void setup()
   {
     int index = PApplet.parseInt(random(fishList.length));
     fishList[index].leader = true;
-    fishList[index].c = color(0, 0, 60);
+    fishList[index].c = color(0, 0, PApplet.parseInt(random(135,155)));
     fishList[index].maxSpeed = 2;
     leaders[i] = index;
   }
@@ -269,7 +270,7 @@ public void draw()
       int index = leaders[i];
       fishList[index].leader = false;
       //fishList[index].c = color(0, 0, int(pow(fishList[i].maxSpeed, 4)));
-      fishList[index].c = color(0, 0, PApplet.parseInt(random(100,255)));
+      fishList[index].c = color(0, 0, PApplet.parseInt(random(155,235)));
       fishList[index].maxSpeed = random(1.5f) + 2.5f;
     }
     
@@ -277,7 +278,7 @@ public void draw()
     {
       int index = PApplet.parseInt(random(fishList.length));
       fishList[index].leader = true;
-      fishList[index].c = color(0, 0, 60);
+      fishList[index].c = color(0, 0, PApplet.parseInt(random(135,155)));
       fishList[index].maxSpeed = 2;
       leaders[i] = index;
     }
@@ -1206,7 +1207,7 @@ public static class TimeUtil
     return System.nanoTime() / 1000000000.d;
   }  
 }  
-  public void settings() {  fullScreen(P3D); }
+  public void settings() {  fullScreen(P3D,2); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "source" };
     if (passedArgs != null) {
