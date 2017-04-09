@@ -9,7 +9,7 @@ public double elapsed10;
 public double elapsed60;
 String display;
 PImage info;
-PFont font;
+//PFont font;
 public int canvas_x = 0;
 public int canvas_y = 0;
 public int canvas_height = 0;
@@ -45,7 +45,7 @@ void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 1500;
+    numFish = 1100;
   }
   else if (displayWidth == 5760)
   {
@@ -55,7 +55,7 @@ void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 1500;
+    numFish = 1400;
   }
   else if (displayWidth == 2880)
   {
@@ -77,9 +77,9 @@ void setup()
     numFish = 1000;
   }
   
-  font = createFont("Ariel",32,true);
+  //font = createFont("Ariel",32,true);
   background(2, 37, 94);
-  fullScreen(P3D,2);
+  fullScreen(P3D);
   //size(1440,900,P3D);
   frameRate(30);
   
@@ -161,9 +161,9 @@ void draw()
   float randomNumber = random(0, 1000);
 
   //print fps top left
-  textFont(font,32);
-  fill(255);
-  text("FPS: " + frameRate,10,25);
+  //textFont(font,32);
+  //fill(255);
+  //text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {

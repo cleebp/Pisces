@@ -25,7 +25,7 @@ public double elapsed10;
 public double elapsed60;
 String display;
 PImage info;
-PFont font;
+//PFont font;
 public int canvas_x = 0;
 public int canvas_y = 0;
 public int canvas_height = 0;
@@ -61,7 +61,7 @@ public void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 1500;
+    numFish = 1100;
   }
   else if (displayWidth == 5760)
   {
@@ -71,7 +71,7 @@ public void setup()
     modifier = 3;
     //canvas_x = 960;
     canvas_x = 985;
-    numFish = 1500;
+    numFish = 1400;
   }
   else if (displayWidth == 2880)
   {
@@ -93,7 +93,7 @@ public void setup()
     numFish = 1000;
   }
   
-  font = createFont("Ariel",32,true);
+  //font = createFont("Ariel",32,true);
   background(2, 37, 94);
   
   //size(1440,900,P3D);
@@ -177,9 +177,9 @@ public void draw()
   float randomNumber = random(0, 1000);
 
   //print fps top left
-  textFont(font,32);
-  fill(255);
-  text("FPS: " + frameRate,10,25);
+  //textFont(font,32);
+  //fill(255);
+  //text("FPS: " + frameRate,10,25);
 
   if(randomNumber > 980) 
   {
@@ -1207,7 +1207,7 @@ public static class TimeUtil
     return System.nanoTime() / 1000000000.d;
   }  
 }  
-  public void settings() {  fullScreen(P3D,2); }
+  public void settings() {  fullScreen(P3D); }
   static public void main(String[] passedArgs) {
     String[] appletArgs = new String[] { "source" };
     if (passedArgs != null) {
